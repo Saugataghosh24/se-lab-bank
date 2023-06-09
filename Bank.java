@@ -3,11 +3,14 @@ import java.util.HashMap;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class Bank {
-    private static HashMap<Integer, AccountDetails> accountDetailsMap = new HashMap<Integer, AccountDetails>();
+    private HashMap<Integer, AccountDetails> accountDetailsMap;
 
     Bank() {
+        this.accountDetailsMap = new HashMap<Integer, AccountDetails>();
         try (FileReader fr = new FileReader("Bank.csv");
                 BufferedReader br = new BufferedReader(fr);) {
             String line = "";
@@ -34,7 +37,7 @@ public class Bank {
     }
 
     public void addAmount(int accNo) {
-        Scanner sc = new Scanner(System.in)
+        Scanner sc = new Scanner(System.in);
 
         AccountDetails acc = accountDetailsMap.get(accNo);
         double balance = acc.getBalance();
@@ -42,10 +45,11 @@ public class Bank {
         System.out.print("Enter amount to add: ");
         float amount = sc.nextFloat();
         acc.setBalance(balance + amount);
+        sc.close();
     }
 
     public void withdraw(int accNo) {
-        Scanner sc = new Scanner(System.in)
+        Scanner sc = new Scanner(System.in);
 
         AccountDetails acc = accountDetailsMap.get(accNo);
         double balance = acc.getBalance();
@@ -55,9 +59,27 @@ public class Bank {
 
         if (amount > balance) {
             System.out.println("Insufficient balance");
-            return;
+            sc.close();
+            throw new Error("insufficient amount");
         }
 
         acc.setBalance(balance - amount);
+        sc.close();
+    }
+
+    public void write() throws IOException {
+        FileWriter fw = new FileWriter("Bank.csv");
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        for (Integer accountNumber : accountDetailsMap.keySet()) {
+            AccountDetails details = accountDetailsMap.get(accountNumber);
+            String outputString = String.format("%d,%s,%.2f", accountNumber, details.getName(),
+                    details.getBalance());
+            bw.write(outputString);
+            bw.newLine();
+        }
+
+        bw.close();
+        fw.close();
     }
 }
