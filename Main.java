@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(final String[] args) {
-        final String outputFileName = "Bank.txt";
         Bank bank = new Bank();
         try (InputStreamReader isr = new InputStreamReader(System.in);
                 BufferedReader br = new BufferedReader(isr);) {
@@ -27,12 +26,12 @@ public class Main {
                         break;
                 }
             }
+            bank.write();
         } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
 
-        bank.write();
     }
 }
