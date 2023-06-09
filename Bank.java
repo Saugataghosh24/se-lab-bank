@@ -82,4 +82,7 @@ public class Bank {
         bw.close();
         fw.close();
     }
+    public HashMap<Integer,AccountDetails> getMap(){
+        return accountDetailsMap;
+    }
 }

@@ -32,6 +32,5 @@ public class Main {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
     }
 }
