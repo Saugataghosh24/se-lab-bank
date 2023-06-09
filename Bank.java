@@ -66,6 +66,10 @@ public class Bank {
         acc.setBalance(balance - amount);
         sc.close();
     }
+    public HashMap<Integer, AccountDetails> getMap()
+    {
+        return accountDetailsMap;
+    }
 
     public void write() throws IOException {
         FileWriter fw = new FileWriter("Bank.csv");
