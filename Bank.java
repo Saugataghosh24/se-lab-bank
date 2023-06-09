@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import java.util.HashMap;
 
 public class Bank {
@@ -31,5 +32,33 @@ public class Bank {
 
         br.close();
         fr.close();
+    }
+
+    public void addAmount(int accNo) {
+        Scanner sc = new Scanner(System.in)
+
+        AccountDetails acc = accountDetailsMap.get(accNo);
+        double balance = acc.getBalance();
+
+        System.out.print("Enter amount to add: ");
+        float amount = sc.nextFloat();
+        acc.setBalance(balance + amount);
+    }
+
+    public void withdraw(int accNo) {
+        Scanner sc = new Scanner(System.in)
+
+        AccountDetails acc = accountDetailsMap.get(accNo);
+        double balance = acc.getBalance();
+
+        System.out.print("Enter amount to withdraw: ");
+        float amount = sc.nextFloat();
+
+        if (amount > balance) {
+            System.out.println("Insufficient balance");
+            return;
+        }
+
+        acc.setBalance(balance - amount);
     }
 }
