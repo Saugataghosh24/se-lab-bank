@@ -29,6 +29,10 @@ public class Bank {
         }
     }
 
+    public boolean checkAccountExistance(int accNo) {
+        return accountDetailsMap.containsKey(accNo)
+    }
+
     public void addAmount(int accNo) {
         Scanner sc = new Scanner(System.in)
 
