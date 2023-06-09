@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class Main {
     public static void main(final String[] args) {
         final String outputFileName = "Bank.txt";
+        Bank bank = new Bank();
         try (InputStreamReader isr = new InputStreamReader(System.in);
                 BufferedReader br = new BufferedReader(isr);) {
             System.out.println("-------- Welcome to the Banking System --------");
@@ -18,9 +19,9 @@ public class Main {
                 int choice = Integer.parseInt(br.readLine());
                 switch (choice) {
                     case 0:
-                        Bank.addAmount(accountNumber);
+                        bank.addAmount(accountNumber);
                     case 1:
-                        Bank.withdraw(accountNumber);
+                        bank.withdraw(accountNumber);
                     default:
                         continueTransaction = false;
                         break;
@@ -32,6 +33,6 @@ public class Main {
             ioe.printStackTrace();
         }
 
-        Bank.write();
+        bank.write();
     }
 }
