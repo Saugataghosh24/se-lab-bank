@@ -32,6 +32,10 @@ public class Bank {
         }
     }
 
+    public boolean checkAccountExistance(int accNo) {
+        return accountDetailsMap.containsKey(accNo);
+    }
+
     public void addAmount(int accNo) {
         Scanner sc = new Scanner(System.in);
 
@@ -39,7 +43,7 @@ public class Bank {
         double balance = acc.getBalance();
 
         System.out.print("Enter amount to add: ");
-        float amount = sc.nextFloat();
+        double amount = sc.nextDouble();
         acc.setBalance(balance + amount);
         sc.close();
     }
@@ -49,7 +53,7 @@ public class Bank {
 
         AccountDetails acc = accountDetailsMap.get(accNo);
         double balance = acc.getBalance();
-
+        System.out.println("Your current balance is :: " + balance);
         System.out.print("Enter amount to withdraw: ");
         float amount = sc.nextFloat();
 
@@ -61,6 +65,10 @@ public class Bank {
 
         acc.setBalance(balance - amount);
         sc.close();
+    }
+    public HashMap<Integer, AccountDetails> getMap()
+    {
+        return accountDetailsMap;
     }
 
     public void write() throws IOException {
@@ -77,5 +85,8 @@ public class Bank {
 
         bw.close();
         fw.close();
+    }
+    public HashMap<Integer,AccountDetails> getMap(){
+        return accountDetailsMap;
     }
 }
